@@ -66,6 +66,11 @@
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
+		<dependency>
+		  <groupId>com.cloudant</groupId>
+		  <artifactId>cloudant-client</artifactId>
+		  <version>2.11.0</version>
+		</dependency>        
 	</dependencies>
 
 	<build>

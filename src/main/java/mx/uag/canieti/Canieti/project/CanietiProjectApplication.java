@@ -3,7 +3,8 @@ package mx.uag.canieti.Canieti.project;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages={
+		"mx.uag.canieti.Canieti.DB", "mx.uag.canieti.Canieti.Controller"})
 public class CanietiProjectApplication {
 
 	public static void main(String[] args) {

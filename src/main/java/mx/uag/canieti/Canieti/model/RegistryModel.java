@@ -2,6 +2,9 @@ package mx.uag.canieti.Canieti.model;
 
 public class RegistryModel {
 	private String name;
+	private String email;
+	private String phone;
+	
 	public String getName() {
 		return name;
 	}
@@ -20,6 +23,4 @@ public class RegistryModel {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	private String email;
-	private String phone;
 }
