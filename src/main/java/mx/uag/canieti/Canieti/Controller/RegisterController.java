@@ -16,19 +16,26 @@ public class RegisterController {
 	private CloudantManager clientDB;
 	
 	@PostMapping
-	private RegistryModel example(@RequestBody RegistryModel registry){
-		validateRegistry(registry);
+	private Object example(@RequestBody RegistryModel registry){
+		
 		try {
+			validateRegistry(registry);
+		}catch(Exception e) {
+			return "{ \"error_code:\" : 1, \"error\": \"Already registered\" }";
+		}
+		
+		try {
+			
 			clientDB.save(registry);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return "{ \"error_code:\" : 2, \"error\": \"Error saving the data.\" }";
 		}
 		return registry;
 	}
 	
-	private void validateRegistry(RegistryModel registry) {
-		//check if exists in DB
-		//If yes return an exception
+	private void validateRegistry(RegistryModel registry) throws Exception {
+		if(clientDB.exists(registry)) {
+			throw new Exception("This element already exist.");
+		}
 	}
 }

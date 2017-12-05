@@ -13,6 +13,8 @@ import com.cloudant.client.api.model.Response;
 
 import mx.uag.canieti.Canieti.model.RegistryModel;
 
+import java.util.List;
+
 @Component
 public class CloudantManager {
 	  @Value("${gacl.cloudant.user:}")
@@ -44,5 +46,19 @@ public class CloudantManager {
 	  public Response save(RegistryModel registry){
 		  Database db= getDB("users");
 		  return db.save(registry);
+	  }
+	  
+	  public boolean exists(RegistryModel registry) {
+		  Database db= getDB("users");
+		  
+		  List<RegistryModel> result = db.findByIndex("{ \"selector\": { \"email\": \"" + registry.getEmail() + "\" } }", RegistryModel.class);
+		  if(result.size() > 0)
+			  return true;
+		  
+		  result = db.findByIndex("{ \"selector\": { \"phone\": \"" + registry.getPhone() + "\" } }", RegistryModel.class);
+		  if(result.size() > 0)
+			  return true;
+		  
+		  return false;
 	  }
 }
